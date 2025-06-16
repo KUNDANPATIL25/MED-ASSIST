@@ -1,0 +1,149 @@
+<!-- ----------- templates/index.html ----------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical AI Chatbot</title>
+    <!-- Use url_for to link CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome link remains the same (external CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add Google Fonts - Material Design style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background div (optional, if you want the animated one instead of static image) -->
+    <!-- <div class="background"></div> -->
+
+    <div class="container">
+        <header class="chat-header">
+            <div class="logo-area">
+                <i class="fas fa-heartbeat medical-icon"></i>
+                <h1>MedAssist AI</h1>
+            </div>
+            <p class="description"></p>
+        </header>
+
+        <!-- Doctor avatar and introduction -->
+        <div class="doctor-intro">
+            <div class="doctor-avatar">
+                <img src="{{ url_for('static', filename='images/doctor-avatar.png') }}" alt="AI Doctor" onerror="this.src='https://via.placeholder.com/120?text=AI+Doctor'">
+            </div>
+            <div class="doctor-info">
+                <h2>Dr. AI Assistant</h2>
+                <p>Interactive medical AI trained to provide health information</p>
+                <span class="status-indicator online">Available Now</span>
+            </div>
+        </div>
+
+        <!-- Conversation suggestions -->
+        <div class="conversation-suggestions">
+            <p>Common questions:</p>
+            <div class="suggestion-chips">
+                <button class="suggestion-chip" data-query="What are symptoms of fever?">Fever symptoms</button>
+                <button class="suggestion-chip" data-query="How to treat a headache?">Headache remedies</button>
+                <button class="suggestion-chip" data-query="I have a sore throat">Sore throat concerns</button>
+                <button class="suggestion-chip" data-query="I'm experiencing back pain">Back pain</button>
+            </div>
+        </div>
+
+        <!-- Input with microphone option - MOVED ABOVE CHAT -->
+        <div class="input-container">
+            <input type="text" id="query-input" class="prompt-box" placeholder="Type your health concern...">
+            <button id="mic-button" class="mic-button" title="Speak your question">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button id="send-button" class="send-button" title="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <!-- Chat container -->
+        <div class="chat-container" id="chat-box">
+            <!-- Initial message from the doctor -->
+            <div class="chat-bubble bot-message with-avatar">
+                <div class="message-content">
+                    <p class="message-header">Dr. AI Assistant</p>
+                    <p>Hello! I'm your interactive medical AI assistant. How can I help you today? Please describe your symptoms or health concerns, and I'll ask follow-up questions if needed to provide better information.</p>
+                    <p class="message-footer">Remember, I'm a chatbot, not a doctor, and cannot provide professional medical advice.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add interactive components container for follow-up questions and UI elements -->
+        <div id="interactive-components"></div>
+
+        <!-- Structured response container (for gemini_generic results) -->
+        <div class="structured-container" id="structured-response">
+            <!-- Structured content will be added here dynamically -->
+        </div>
+        
+        <!-- Add structured response area for displaying assessments -->
+        <div id="structured-response-area"></div>
+
+        <!-- Image container -->
+        <div class="image-container" id="image-box">
+            <!-- Images will be added here by the script -->
+        </div>
+
+        <div class="consultation-footer">
+            <div class="consultation-notice">
+                <i class="fas fa-info-circle"></i>
+                <span>This is an AI assistant providing general health information. For medical emergencies, call emergency services.</span>
+            </div>
+            <div class="buttons">
+                <a id="google-link" href="https://www.google.com" target="_blank">
+                    <i class="fab fa-google"></i> Research More
+                </a>
+                <a id="youtube-link" href="https://www.youtube.com" target="_blank">
+                    <i class="fab fa-youtube"></i> Health Videos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="about">
+        <h2>About MedAssist AI</h2>
+        <p>MedAssist AI provides accessible medical information powered by advanced AI. While our assistant can help with general health inquiries, it is not a substitute for professional medical advice. Always consult a qualified healthcare provider for medical concerns.</p>
+        <div class="about-features">
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <span>AI-Powered Analysis</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-lock"></i>
+                <span>Secure Conversations</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-book-medical"></i>
+                <span>Medical Knowledge</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-comments"></i>
+                <span>Interactive Conversations</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Created with ❤️ in India
+    </div>
+
+    <!-- Modal for Image Zoom -->
+    <div id="modal" class="modal">
+        <img id="zoomed-image" src="" alt="Zoomed Image">
+    </div>
+
+    <!-- Mode Toggle Button -->
+    <button id="mode-toggle" class="mode-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Use url_for to link JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+<!-- ----------- End of templates/index.html ----------- -->
